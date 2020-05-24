@@ -77,11 +77,11 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/rounded_button"
         android:text="Register"
+        android:textAllCaps="false"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/edittext_username"
         app:layout_constraintStart_toStartOf="@+id/edittext_username"
         app:layout_constraintTop_toBottomOf="@+id/edittext_password" />
-
 
 
     <TextView
@@ -90,6 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Already registered? Log in"
+        android:textColor="@color/colorMediumGrey"
         app:layout_constraintEnd_toEndOf="@+id/button_register"
         app:layout_constraintStart_toStartOf="@+id/button_register"
         app:layout_constraintTop_toBottomOf="@+id/button_register" />
