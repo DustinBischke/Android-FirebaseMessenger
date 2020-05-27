@@ -11,7 +11,6 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -53,12 +52,13 @@ class RegisterActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == REQUEST_IMAGE_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            val photoUri = data.data
-            if (photoUri != null) {
+            if (data.data != null) {
+                imageUri = data.data!!
+
                 val bitmap = if (Build.VERSION.SDK_INT < 28) {
-                    MediaStore.Images.Media.getBitmap(this.contentResolver, photoUri)
+                    MediaStore.Images.Media.getBitmap(this.contentResolver, imageUri)
                 } else {
-                    val source = ImageDecoder.createSource(this.contentResolver, photoUri)
+                    val source = ImageDecoder.createSource(this.contentResolver, imageUri)
                     ImageDecoder.decodeBitmap(source)
                 }
 
@@ -106,7 +106,10 @@ class RegisterActivity : AppCompatActivity() {
                         createUserFirestore(uid, username)
 
                         if (::imageUri.isInitialized) {
-                            uploadProfileImage(user, imageUri)
+                            uploadProfileImage(uid, imageUri)
+                            Log.d(TAG, "imageUri is initialized")
+                        } else {
+                            Log.d(TAG, "imageUri is NOT initialized")
                         }
                     }
                 } else {
@@ -136,10 +139,10 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun uploadProfileImage(firebaseUser: FirebaseUser, uri: Uri) {
-        val reference = storage.getReference("/images/profile/$firebaseUser.uid")
+    private fun uploadProfileImage(uid: String, uri: Uri) {
+        val reference = storage.getReference("/images/profile/$uid")
 
-        reference.putFile(imageUri)
+        reference.putFile(uri)
             .addOnSuccessListener {
                 Log.d(TAG, "Successfully uploaded image.")
             }
