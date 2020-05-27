@@ -25,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/rounded_view"
         android:ems="10"
@@ -36,7 +36,7 @@
         android:textColor="@color/colorDarkGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_create_account" />
+        app:layout_constraintTop_toBottomOf="@+id/button_select_photo" />
 
     <EditText
         android:id="@+id/edittext_email"
@@ -94,5 +94,17 @@
         app:layout_constraintEnd_toEndOf="@+id/button_register"
         app:layout_constraintStart_toStartOf="@+id/button_register"
         app:layout_constraintTop_toBottomOf="@+id/button_register" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/button_select_photo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="32dp"
+        android:src="@color/colorLightGrey"
+        app:civ_border_width="4dp"
+        app:civ_border_color="@color/colorLightGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_create_account" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
