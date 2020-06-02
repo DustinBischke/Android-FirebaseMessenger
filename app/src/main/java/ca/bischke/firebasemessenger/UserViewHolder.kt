@@ -22,5 +22,4 @@ class UserViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
                 .into(imageProfile)
         }
     }
-
 }

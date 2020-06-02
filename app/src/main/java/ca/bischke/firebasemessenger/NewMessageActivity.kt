@@ -58,19 +58,19 @@ class NewMessageActivity : AppCompatActivity() {
         for (queryDocumentSnapshot in collection) {
             if (queryDocumentSnapshot.get("username") != null) {
                 val userId = queryDocumentSnapshot.id
-                val username = queryDocumentSnapshot.get("username")
-                var imageUrl: String? = null
+                val username = queryDocumentSnapshot.get("username").toString()
 
                 storage.reference.child("images/profile/$userId").downloadUrl
                     .addOnSuccessListener {
-                        imageUrl = it.toString()
+                        val imageUrl = it.toString()
+                        val user = User(username, imageUrl)
+                        users.add(user)
+                        adapter.notifyDataSetChanged()
                     }.addOnFailureListener{
-                        Log.d(TAG, "Unable to load image url")
+                        val user = User(username, null)
+                        users.add(user)
+                        adapter.notifyDataSetChanged()
                     }
-
-                val user = User(queryDocumentSnapshot.get("username").toString(), imageUrl)
-                users.add(user)
-                adapter.notifyDataSetChanged()
             }
         }
     }
