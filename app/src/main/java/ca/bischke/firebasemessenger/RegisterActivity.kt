@@ -107,11 +107,12 @@ class RegisterActivity : AppCompatActivity() {
 
                         if (::imageUri.isInitialized) {
                             uploadProfileImage(uid, imageUri)
-                            Log.d(TAG, "imageUri is initialized")
-                        } else {
-                            Log.d(TAG, "imageUri is NOT initialized")
                         }
                     }
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Failed to create account.", Toast.LENGTH_SHORT)
@@ -140,7 +141,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun uploadProfileImage(uid: String, uri: Uri) {
-        val reference = storage.getReference("/images/profile/$uid")
+        val reference = storage.getReference("images/profile/$uid")
 
         reference.putFile(uri)
             .addOnSuccessListener {
