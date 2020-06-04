@@ -106,7 +106,7 @@ class RegisterActivity : AppCompatActivity() {
                         createUserFirestore(uid, username)
 
                         if (::imageUri.isInitialized) {
-                            uploadProfileImage(uid, imageUri)
+                            uploadProfileImage(username, imageUri)
                         }
                     }
 
@@ -140,8 +140,8 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun uploadProfileImage(uid: String, uri: Uri) {
-        val reference = storage.getReference("images/profile/$uid")
+    private fun uploadProfileImage(username: String, uri: Uri) {
+        val reference = storage.getReference("images/profile/$username")
 
         reference.putFile(uri)
             .addOnSuccessListener {

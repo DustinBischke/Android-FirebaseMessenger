@@ -1,20 +1,40 @@
 package ca.bischke.firebasemessenger
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.storage.FirebaseStorage
+import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.extensions.LayoutContainer
 
-class UserAdapter(private val list: List<User>) : RecyclerView.Adapter<UserViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        return UserViewHolder(inflater, parent)
+class UserAdapter(options: FirestoreRecyclerOptions<User>) :
+    FirestoreRecyclerAdapter<User, UserAdapter.ViewHolder>(options) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_user, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val user: User = list[position]
-        holder.bind(user)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, model: User) {
+        holder.apply {
+            val username = model.username
+            textUsername.text = username
+
+            val reference = FirebaseStorage.getInstance().reference.child("images/profile/$username")
+
+            Glide.with(imageProfile)
+                .load(reference)
+                .centerCrop()
+                .into(imageProfile)
+        }
     }
 
-    override fun getItemCount(): Int = list.size
-
+    inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+        val textUsername: TextView = itemView.findViewById(R.id.text_username)
+        val imageProfile: CircleImageView = itemView.findViewById(R.id.imageview_profile)
+    }
 }
