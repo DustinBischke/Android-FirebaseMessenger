@@ -4,7 +4,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -18,7 +20,8 @@ class NewMessageActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var storage: FirebaseStorage
     private val users = mutableListOf<User>()
-    private lateinit var adapter: UserAdapter
+    //private lateinit var adapter: UserAdapter
+    private lateinit var adapter: UserFirestoreAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +32,34 @@ class NewMessageActivity : AppCompatActivity() {
         firestore = Firebase.firestore
         storage = Firebase.storage
 
-        adapter = UserAdapter(users)
-        recyclerview_users.adapter = adapter
+        val query = firestore.collection("users")
+            .orderBy("username")
+        val options = FirestoreRecyclerOptions.Builder<User>()
+            .setQuery(query, User::class.java)
+            .build()
 
-        fetchUsers()
+        //adapter = UserAdapter(users)
+        //fetchUsers()
+        adapter = UserFirestoreAdapter(options)
+        recyclerview_users.adapter = adapter
     }
 
-    private fun fetchUsers() {
+    override fun onStart() {
+        super.onStart()
+        adapter.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        adapter.stopListening()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return super.onSupportNavigateUp()
+    }
+
+    /*private fun fetchUsers() {
         val reference = firestore.collection("users")
         reference.get()
             .addOnSuccessListener { collection ->
@@ -73,10 +97,5 @@ class NewMessageActivity : AppCompatActivity() {
                     }
             }
         }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return super.onSupportNavigateUp()
-    }
+    }*/
 }
