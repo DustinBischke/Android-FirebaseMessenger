@@ -12,7 +12,7 @@ import com.google.firebase.storage.FirebaseStorage
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.extensions.LayoutContainer
 
-class UserAdapter(options: FirestoreRecyclerOptions<User>) :
+class UserAdapter(options: FirestoreRecyclerOptions<User>, val clickListener: (User) -> Unit) :
     FirestoreRecyclerAdapter<User, UserAdapter.ViewHolder>(options) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_user, parent, false)
@@ -30,6 +30,8 @@ class UserAdapter(options: FirestoreRecyclerOptions<User>) :
                 .load(reference)
                 .centerCrop()
                 .into(imageProfile)
+
+            holder.containerView.setOnClickListener { clickListener(model) }
         }
     }
 
