@@ -14,7 +14,8 @@
         app:layout_constraintBottom_toTopOf="@+id/edittext_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     <EditText
         android:id="@+id/edittext_message"

@@ -1,3 +1,7 @@
 package ca.bischke.firebasemessenger
 
-data class User(val username: String = "")
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class User(val username: String = "") : Parcelable

@@ -52,6 +52,7 @@ class NewMessageActivity : AppCompatActivity() {
 
     private fun userItemClicked(user: User) {
         val intent = Intent(this, MessageActivity::class.java)
+        intent.putExtra("USER", user)
         startActivity(intent)
         finish()
     }
