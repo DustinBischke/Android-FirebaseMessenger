@@ -127,7 +127,8 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun createUserFirestore(uid: String, username: String) {
         val userHashMap = hashMapOf(
-            "username" to username
+            "username" to username,
+            "uid" to uid
         )
 
         firestore.collection("users").document(uid)

@@ -11,7 +11,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.activity_new_message.*
 
-
 class NewMessageActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var storage: FirebaseStorage
@@ -31,7 +30,7 @@ class NewMessageActivity : AppCompatActivity() {
             .setQuery(query, User::class.java)
             .build()
 
-        adapter = UserAdapter(options) { user: User -> userItemClicked(user)}
+        adapter = UserAdapter(options) { user: User -> userItemClicked(user) }
         recyclerview_users.adapter = adapter
     }
 
