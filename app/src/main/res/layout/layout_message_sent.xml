@@ -10,7 +10,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_account_circle_dark_24"
+        android:src="@drawable/ic_account_circle_24"
         app:layout_constraintBottom_toBottomOf="@+id/text_message"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -20,8 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_view"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_message_sent"
         android:backgroundTint="@color/colorLightGrey"
         android:maxLines="1000"
         android:padding="16dp"

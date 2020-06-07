@@ -25,7 +25,7 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="32dp"
-        android:src="@drawable/ic_account_circle_dark_256"
+        android:src="@drawable/ic_account_circle_256"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_create_account" />
