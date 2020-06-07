@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.extensions.LayoutContainer
 
 class MessageAdapter(options: FirestoreRecyclerOptions<Message>) :
@@ -15,12 +17,12 @@ class MessageAdapter(options: FirestoreRecyclerOptions<Message>) :
         return when (viewType) {
             0 -> {
                 val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.layout_message_received, parent, false)
+                    .inflate(R.layout.layout_message_sent, parent, false)
                 ViewHolder(view)
             }
             else -> {
                 val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.layout_message_sent, parent, false)
+                    .inflate(R.layout.layout_message_received, parent, false)
                 ViewHolder(view)
             }
         }
@@ -34,7 +36,11 @@ class MessageAdapter(options: FirestoreRecyclerOptions<Message>) :
 
     // TODO Set view type based on sender
     override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
+        return if (getItem(position).fromId == Firebase.auth.uid) {
+            0
+        } else {
+            1
+        }
     }
 
     inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {

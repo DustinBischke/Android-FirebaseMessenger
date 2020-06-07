@@ -25,12 +25,21 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="32dp"
-        android:src="@color/colorLightGrey"
-        app:civ_border_width="4dp"
-        app:civ_border_color="@color/colorLightGrey"
+        android:src="@drawable/ic_account_circle_dark_256"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_create_account" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/button_select_photo2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_add_24"
+        app:civ_border_color="@android:color/white"
+        app:civ_border_width="4dp"
+        app:civ_circle_background_color="@color/colorDarkGrey"
+        app:layout_constraintBottom_toBottomOf="@+id/button_select_photo"
+        app:layout_constraintEnd_toEndOf="@+id/button_select_photo" />
 
     <EditText
         android:id="@+id/edittext_username"

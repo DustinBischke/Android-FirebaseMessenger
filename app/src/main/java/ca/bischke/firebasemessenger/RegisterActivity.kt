@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -39,6 +40,10 @@ class RegisterActivity : AppCompatActivity() {
             buttonSelectPhotoClick()
         }
 
+        button_select_photo2.setOnClickListener {
+            buttonSelectPhotoClick()
+        }
+
         button_register.setOnClickListener {
             buttonRegisterClick()
         }
@@ -63,6 +68,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
                 button_select_photo.setImageBitmap(bitmap)
+                button_select_photo2.visibility = View.GONE
             }
         }
     }
