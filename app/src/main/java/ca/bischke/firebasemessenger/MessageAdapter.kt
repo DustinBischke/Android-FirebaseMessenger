@@ -34,12 +34,14 @@ class MessageAdapter(options: FirestoreRecyclerOptions<Message>) :
             val date = model.timestamp.toDate()
             val dateFormat = SimpleDateFormat("MMMM dd, yyyy")
             val timeFormat = SimpleDateFormat("h:mm a")
-            textReceived.text = timeFormat.format(date).toString()
+
+            textTime.text = timeFormat.format(date).toString()
 
             if (position == 0) {
                 textDate.text = dateFormat.format(date).toString()
             }
 
+            // Date
             if (position > 0) {
                 val previousDate = getItem(position - 1).timestamp.toDate()
 
@@ -50,20 +52,20 @@ class MessageAdapter(options: FirestoreRecyclerOptions<Message>) :
                 }
             }
 
+            // Time
             if (position < itemCount - 1) {
-                val nextDate = getItem(position + 1).timestamp.toDate()
+                if (model.fromId == getItem(position + 1).fromId) {
+                    val nextDate = getItem(position + 1).timestamp.toDate()
 
-                if (timeFormat.format(date) == timeFormat.format(nextDate)) {
-                    textReceived.visibility = View.GONE
-                    imageProfile.visibility = View.INVISIBLE
-                } else {
-                    textReceived.text = timeFormat.format(date).toString()
+                    if (timeFormat.format(date) == timeFormat.format(nextDate)) {
+                        textTime.visibility = View.GONE
+                        imageProfile.visibility = View.INVISIBLE
+                    }
                 }
             }
         }
     }
 
-    // TODO Set view type based on sender
     override fun getItemViewType(position: Int): Int {
         return position
     }
@@ -74,7 +76,7 @@ class MessageAdapter(options: FirestoreRecyclerOptions<Message>) :
 
     inner class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         val textMessage: TextView = itemView.findViewById(R.id.text_message)
-        val textReceived: TextView = itemView.findViewById(R.id.text_received)
+        val textTime: TextView = itemView.findViewById(R.id.text_received)
         val textDate: TextView = itemView.findViewById(R.id.text_date)
         val imageProfile: CircleImageView = itemView.findViewById(R.id.imageview_profile)
     }
