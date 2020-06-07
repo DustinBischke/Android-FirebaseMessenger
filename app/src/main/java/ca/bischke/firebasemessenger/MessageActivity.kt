@@ -43,6 +43,7 @@ class MessageActivity : AppCompatActivity() {
             .build()
 
         adapter = MessageAdapter(options)
+        adapter.hasStableIds()
         recyclerview_messages.adapter = adapter
 
         edittext_message.addTextChangedListener(object : TextWatcher {
@@ -80,6 +81,10 @@ class MessageActivity : AppCompatActivity() {
     }
 
     private fun buttonSendClick() {
+        if (edittext_message.text.isBlank()) {
+            return
+        }
+
         val user = intent.getParcelableExtra<User>("USER")
         val message = edittext_message.text.toString()
         val fromId = auth.uid
