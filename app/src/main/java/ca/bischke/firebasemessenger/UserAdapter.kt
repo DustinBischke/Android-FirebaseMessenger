@@ -24,7 +24,8 @@ class UserAdapter(options: FirestoreRecyclerOptions<User>, val clickListener: (U
             val username = model.username
             textUsername.text = username
 
-            val reference = FirebaseStorage.getInstance().reference.child("images/profile/$username")
+            val uid = model.uid
+            val reference = FirebaseStorage.getInstance().reference.child("images/profile/$uid")
 
             Glide.with(imageProfile)
                 .load(reference)

@@ -5,10 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.extensions.LayoutContainer
 import java.text.SimpleDateFormat
@@ -36,6 +38,14 @@ class MessageAdapter(options: FirestoreRecyclerOptions<Message>) :
             val timeFormat = SimpleDateFormat("h:mm a")
 
             textTime.text = timeFormat.format(date).toString()
+
+            val uid = model.fromId
+            val reference = FirebaseStorage.getInstance().reference.child("images/profile/$uid")
+
+            Glide.with(imageProfile)
+                .load(reference)
+                .centerCrop()
+                .into(imageProfile)
 
             if (position == 0) {
                 textDate.text = dateFormat.format(date).toString()

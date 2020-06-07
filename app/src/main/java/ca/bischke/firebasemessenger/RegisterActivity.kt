@@ -112,7 +112,7 @@ class RegisterActivity : AppCompatActivity() {
                         createUserFirestore(uid, username)
 
                         if (::imageUri.isInitialized) {
-                            uploadProfileImage(username, imageUri)
+                            uploadProfileImage(uid, imageUri)
                         }
                     }
 
