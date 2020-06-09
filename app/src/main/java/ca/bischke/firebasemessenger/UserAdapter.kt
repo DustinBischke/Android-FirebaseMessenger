@@ -27,12 +27,14 @@ class UserAdapter(options: FirestoreRecyclerOptions<User>, val clickListener: (U
             val uid = model.uid
             val reference = FirebaseStorage.getInstance().reference.child("images/profile/$uid")
 
-            Glide.with(imageProfile)
-                .load(reference)
-                .centerCrop()
-                .into(imageProfile)
+            reference.downloadUrl.addOnSuccessListener {
+                Glide.with(imageProfile)
+                    .load(reference)
+                    .centerCrop()
+                    .into(imageProfile)
+            }
 
-            holder.containerView.setOnClickListener { clickListener(model) }
+            containerView.setOnClickListener { clickListener(model) }
         }
     }
 

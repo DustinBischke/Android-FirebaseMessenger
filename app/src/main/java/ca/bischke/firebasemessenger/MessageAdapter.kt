@@ -42,10 +42,14 @@ class MessageAdapter(options: FirestoreRecyclerOptions<Message>) :
             val uid = model.fromId
             val reference = FirebaseStorage.getInstance().reference.child("images/profile/$uid")
 
-            Glide.with(imageProfile)
-                .load(reference)
-                .centerCrop()
-                .into(imageProfile)
+            reference.downloadUrl.addOnSuccessListener {
+                Glide.with(imageProfile)
+                    .load(reference)
+                    .centerCrop()
+                    .into(imageProfile)
+            }.addOnFailureListener {
+
+            }
 
             if (position == 0) {
                 textDate.text = dateFormat.format(date).toString()
