@@ -29,14 +29,14 @@ class MessageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_message)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val user = intent.getParcelableExtra<User>("USER")
-        supportActionBar?.title = user?.username
+        val channel = intent.getParcelableExtra<Channel>("CHANNEL")
+        supportActionBar?.title = channel?.name
 
         auth = Firebase.auth
         firestore = Firebase.firestore
         storage = Firebase.storage
 
-        val query = firestore.collection("messages")
+        val query = firestore.collection("channels").document(channel.cid).collection("messages")
             .orderBy("timestamp")
         val options = FirestoreRecyclerOptions.Builder<Message>()
             .setQuery(query, Message::class.java)
@@ -85,21 +85,29 @@ class MessageActivity : AppCompatActivity() {
             return
         }
 
-        val user = intent.getParcelableExtra<User>("USER")
+        val channel = intent.getParcelableExtra<Channel>("CHANNEL")
         val message = edittext_message.text.toString()
-        val fromId = auth.uid
-        val toId = user?.uid
+        val uid = auth.uid
+        val cid = channel?.cid
         val timestamp = Timestamp.now()
 
-        val userHashMap = hashMapOf(
+        val messageHashMap = hashMapOf(
             "message" to message,
-            "fromId" to fromId,
-            "toId" to toId,
+            "uid" to uid,
             "timestamp" to timestamp
         )
 
-        firestore.collection("messages")
-            .add(userHashMap)
+        firestore.collection("channels").document(channel.cid).collection("messages")
+            .add(messageHashMap)
+            .addOnSuccessListener {
+                Log.d(TAG, "Document successfully written.")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error writing document.", e)
+            }
+
+        firestore.collection("channels").document(channel.cid)
+            .update(mapOf("message" to message))
             .addOnSuccessListener {
                 Log.d(TAG, "Document successfully written.")
             }

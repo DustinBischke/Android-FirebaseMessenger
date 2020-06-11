@@ -7,13 +7,11 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.activity_new_message.*
 
+// TODO Setup Channels now that this doesn't work anymore :D
 class NewMessageActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
-    private lateinit var storage: FirebaseStorage
     private lateinit var adapter: UserAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +20,6 @@ class NewMessageActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         firestore = Firebase.firestore
-        storage = Firebase.storage
 
         val query = firestore.collection("users")
             .orderBy("username")

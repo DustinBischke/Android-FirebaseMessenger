@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat
 class MessageAdapter(options: FirestoreRecyclerOptions<Message>) :
     FirestoreRecyclerAdapter<Message, MessageAdapter.ViewHolder>(options) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return if (getItem(viewType).fromId == Firebase.auth.uid) {
+        return if (getItem(viewType).uid == Firebase.auth.uid) {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.layout_message_sent, parent, false)
             ViewHolder(view)
@@ -39,7 +39,7 @@ class MessageAdapter(options: FirestoreRecyclerOptions<Message>) :
 
             textTime.text = timeFormat.format(date).toString()
 
-            val uid = model.fromId
+            val uid = model.uid
             val reference = FirebaseStorage.getInstance().reference.child("images/profile/$uid")
 
             reference.downloadUrl.addOnSuccessListener {
@@ -68,7 +68,7 @@ class MessageAdapter(options: FirestoreRecyclerOptions<Message>) :
 
             // Time
             if (position < itemCount - 1) {
-                if (model.fromId == getItem(position + 1).fromId) {
+                if (model.uid == getItem(position + 1).uid) {
                     val nextDate = getItem(position + 1).timestamp.toDate()
 
                     if (timeFormat.format(date) == timeFormat.format(nextDate)) {
