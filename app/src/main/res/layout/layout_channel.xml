@@ -38,6 +38,8 @@
         android:id="@+id/text_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:text="Message"
         app:layout_constraintBottom_toBottomOf="@+id/imageview_profile"
         app:layout_constraintEnd_toEndOf="@+id/text_channel"
