@@ -46,20 +46,6 @@ class MessageActivity : AppCompatActivity() {
         adapter.hasStableIds()
         recyclerview_messages.adapter = adapter
 
-        edittext_message.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (edittext_message.text.isEmpty()) {
-                    button_send.visibility = View.GONE
-                } else {
-                    button_send.visibility = View.VISIBLE
-                }
-            }
-        })
-
         button_send.setOnClickListener {
             buttonSendClick()
         }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -23,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Channel"
+        android:text="@string/channel"
         android:textColor="@color/colorDarkGrey"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -40,7 +39,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="Message"
+        android:text="@string/message"
         app:layout_constraintBottom_toBottomOf="@+id/imageview_profile"
         app:layout_constraintEnd_toEndOf="@+id/text_channel"
         app:layout_constraintStart_toStartOf="@+id/text_channel"

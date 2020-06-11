@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/date"
+        android:textColor="@color/colorDarkGrey"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageview_profile"
@@ -22,10 +33,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_message_sent"
-        android:backgroundTint="@color/colorAccentLight"
+        android:includeFontPadding="false"
         android:maxLines="1000"
         android:padding="16dp"
-        android:text="Message"
+        android:text="@string/message"
         android:textColor="@color/colorDarkGrey"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/imageview_profile"
@@ -37,22 +48,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Time"
+        android:text="@string/time"
         android:textColor="@color/colorMediumGrey"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/text_message"
         app:layout_constraintTop_toBottomOf="@+id/text_message" />
-
-    <TextView
-        android:id="@+id/text_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Date"
-        android:textColor="@color/colorDarkGrey"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
