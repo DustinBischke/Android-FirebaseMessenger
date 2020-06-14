@@ -37,7 +37,7 @@
         android:maxLines="1000"
         android:padding="16dp"
         android:text="@string/message"
-        android:textColor="@color/colorDarkGrey"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/imageview_profile"
         app:layout_constraintHorizontal_bias="1.0"

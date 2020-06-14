@@ -92,8 +92,13 @@ class MessageActivity : AppCompatActivity() {
                 Log.w(TAG, "Error writing document.", e)
             }
 
+        val messageMap = mapOf(
+            "message" to message,
+            "timestamp" to timestamp
+        )
+
         firestore.collection("channels").document(channel.cid)
-            .update(mapOf("message" to message))
+            .update(messageMap)
             .addOnSuccessListener {
                 Log.d(TAG, "Document successfully written.")
             }
